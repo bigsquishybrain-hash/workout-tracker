@@ -3,7 +3,7 @@
    On a fresh phone (never synced), the first sync pulls Drive's data in and merges it. */
 'use strict';
 
-const GOOGLE_CLIENT_ID = 'PASTE_CLIENT_ID_HERE.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = '713363327828-hmnh007ejs4o4ujpimvp8jl2o6d31mvb.apps.googleusercontent.com';
 const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive';
 const FOLDER_NAME = 'Workouts';
 const FILE_NAME = 'WorkoutTracker.xlsx';
