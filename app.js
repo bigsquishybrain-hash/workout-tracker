@@ -251,25 +251,86 @@ function renderBackup() {
 }
 
 /* ---------- THEMES ---------- */
-// To add a theme: add an entry here and a matching [data-theme=...] block in style.css.
+// Preset: add an entry here and a matching [data-theme=...] block in style.css.
+// "base" lists the 7 colors the Custom editor starts from when you customize that preset.
 const THEMES = [
-  { id: 'default', name: 'Gym Rat', bar: '#16181d', sw: ['#16181d', '#22252c', '#f5a623', '#3ecf74'] },
-  { id: 'gundam', name: 'Gundam', bar: '#ffffff', sw: ['#ffffff', '#1d4fa3', '#d32f2f', '#ffd23f'] },
+  { id: 'default', name: 'Gym Rat', bar: '#16181d', base: { bg: '#16181d', card: '#22252c', txt: '#eceef1', acc: '#f5a623', ok: '#3ecf74', nav: '#1c1f25', trim: '#f5a623' } },
+  { id: 'gundam', name: 'Gundam', bar: '#ffffff', base: { bg: '#e9edf3', card: '#ffffff', txt: '#16213e', acc: '#1d4fa3', ok: '#d39600', nav: '#1d4fa3', trim: '#d32f2f' } },
 ];
+const CUSTOM_FIELDS = [
+  ['bg', 'Background'], ['card', 'Cards & header'], ['txt', 'Text'], ['acc', 'Buttons'],
+  ['ok', 'Completed sets'], ['nav', 'Bottom bar'], ['trim', 'Trim (header line, next group)'],
+];
+const hex2rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const rgb2hex = (c) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
+const mix = (a, b, t) => rgb2hex(hex2rgb(a).map((v, i) => v + (hex2rgb(b)[i] - v) * t));
+const lum = (h) => { const [r, g, b] = hex2rgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+const onColor = (h) => (lum(h) > 0.4 ? '#111111' : '#ffffff');
+function customVars(c) {
+  return {
+    '--bg': c.bg, '--card': c.card, '--txt': c.txt, '--acc': c.acc, '--on-acc': onColor(c.acc), '--ok': c.ok,
+    '--line': mix(c.card, c.txt, 0.2), '--dim': mix(c.txt, c.bg, 0.4), '--bad': '#e5534b',
+    '--head': c.card, '--head-line': c.trim, '--next': c.trim,
+    '--nav': c.nav, '--nav-txt': mix(onColor(c.nav), c.nav, 0.3), '--nav-on': lum(c.ok) - lum(c.nav) > 0.15 || lum(c.nav) - lum(c.ok) > 0.15 ? c.ok : onColor(c.nav),
+    'color-scheme': lum(c.bg) > 0.4 ? 'light' : 'dark',
+  };
+}
+const ls = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
+let custom = (() => { try { return JSON.parse(ls.get('wt-theme-custom')); } catch { return null; } })();
+
 function applyTheme(id) {
-  const t = THEMES.find((x) => x.id === id) || THEMES[0];
-  if (t.id === 'default') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t.id;
-  document.querySelector('meta[name=theme-color]').content = t.bar;
-  try { localStorage.setItem('wt-theme', t.id); } catch {}
+  const root = document.documentElement;
+  for (const k of Object.keys(customVars(THEMES[0].base))) root.style.removeProperty(k);
+  if (id === 'custom' && custom) {
+    root.dataset.theme = 'custom';
+    const v = customVars(custom);
+    Object.entries(v).forEach(([k, val]) => root.style.setProperty(k, val));
+    ls.set('wt-theme-vars', JSON.stringify(v));
+    document.querySelector('meta[name=theme-color]').content = custom.card;
+  } else {
+    const t = THEMES.find((x) => x.id === id) || THEMES[0]; id = t.id;
+    if (id === 'default') delete root.dataset.theme; else root.dataset.theme = id;
+    document.querySelector('meta[name=theme-color]').content = t.bar;
+  }
+  ls.set('wt-theme', id);
   renderThemes();
 }
+const swatch = (b) => `<span class="swatch">${[b.bg, b.acc, b.trim, b.ok].map((c) => `<i style="background:${c}"></i>`).join('')}</span>`;
 function renderThemes() {
   const cur = document.documentElement.dataset.theme || 'default';
-  $('#themes').innerHTML = THEMES.map((t) => `<button class="${t.id === cur ? 'on' : ''}" data-theme-id="${t.id}">
-    <span class="swatch">${t.sw.map((c) => `<i style="background:${c}"></i>`).join('')}</span>${esc(t.name)}</button>`).join('');
+  $('#themes').innerHTML = THEMES.map((t) => `<button class="${t.id === cur ? 'on' : ''}" data-theme-id="${t.id}">${swatch(t.base)}${esc(t.name)}</button>`).join('')
+    + `<button class="${cur === 'custom' ? 'on' : ''}" data-theme-id="custom">${custom ? swatch(custom) : '🎨'} Custom</button>`;
+  const ed = $('#custom-editor');
+  ed.hidden = cur !== 'custom';
+  if (!ed.hidden) {
+    $('#custom-fields').innerHTML = CUSTOM_FIELDS.map(([k, label]) =>
+      `<label class="pick"><input type="color" data-k="${k}" value="${custom[k]}"><span>${label}</span></label>`).join('');
+  }
 }
-$('#themes').addEventListener('click', (e) => { const b = e.target.closest('[data-theme-id]'); if (b) applyTheme(b.dataset.themeId); });
-applyTheme(localStorage.getItem('wt-theme') || 'default');
+$('#themes').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-theme-id]'); if (!b) return;
+  if (b.dataset.themeId === 'custom' && !custom) {
+    // First time: start from whatever preset is on now.
+    const cur = THEMES.find((t) => t.id === (document.documentElement.dataset.theme || 'default')) || THEMES[0];
+    custom = { ...cur.base }; ls.set('wt-theme-custom', JSON.stringify(custom));
+  }
+  applyTheme(b.dataset.themeId);
+});
+$('#custom-editor').addEventListener('input', (e) => {
+  const k = e.target.dataset.k; if (!k) return;
+  custom[k] = e.target.value; ls.set('wt-theme-custom', JSON.stringify(custom));
+  const v = customVars(custom), root = document.documentElement;
+  Object.entries(v).forEach(([n, val]) => root.style.setProperty(n, val));
+  ls.set('wt-theme-vars', JSON.stringify(v));
+  document.querySelector('meta[name=theme-color]').content = custom.card;
+  $('#themes [data-theme-id=custom] .swatch').outerHTML = swatch(custom);
+});
+$('#custom-editor').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-start]'); if (!b) return;
+  custom = { ...THEMES.find((t) => t.id === b.dataset.start).base };
+  ls.set('wt-theme-custom', JSON.stringify(custom)); applyTheme('custom');
+});
+applyTheme(ls.get('wt-theme') || 'default');
 
 /* ---------- boot ---------- */
 function replaceDb(data) {

@@ -8,8 +8,8 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="stylesheet" href="style.css?v=5">
-<script>try{var t=localStorage.getItem('wt-theme');if(t&&t!=='default')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="style.css?v=6">
+<script>try{var t=localStorage.getItem('wt-theme'),r=document.documentElement;if(t&&t!=='default')r.dataset.theme=t;if(t==='custom'){var v=JSON.parse(localStorage.getItem('wt-theme-vars')||'{}');for(var k in v)r.style.setProperty(k,v[k])}}catch(e){}</script>
 </head>
 <body>
 <header>
@@ -56,6 +56,12 @@
       <h3>Color theme</h3>
       <p class="hint">Tap one to switch.</p>
       <div id="themes" class="themes"></div>
+      <div id="custom-editor" hidden>
+        <div id="custom-fields" class="picks"></div>
+        <p class="hint">Changes show up as you pick. Start over from:
+          <button class="small" data-start="default">Gym Rat</button>
+          <button class="small" data-start="gundam">Gundam</button></p>
+      </div>
     </div>
     <div class="card">
       <h3>Backup to Excel</h3>
@@ -87,8 +93,8 @@
   <button data-view="backup">⚙️<span>Settings</span></button>
 </nav>
 
-<script src="xlsx.full.min.js?v=5"></script>
-<script src="sync.js?v=5"></script>
-<script src="app.js?v=5"></script>
+<script src="xlsx.full.min.js?v=6"></script>
+<script src="sync.js?v=6"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>

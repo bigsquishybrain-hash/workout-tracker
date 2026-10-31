@@ -58,3 +58,6 @@ header .saved{margin-left:8px}
 .themes button.on{outline:2px solid var(--acc)}
 .swatch{display:inline-flex;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
 .swatch i{width:12px;height:18px}
+.picks{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.pick{display:flex;align-items:center;gap:10px}
+.pick input[type=color]{width:48px;height:36px;padding:2px;border-radius:8px;flex:none}
