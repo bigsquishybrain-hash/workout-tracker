@@ -49,6 +49,36 @@ function lastSession(exId, beforeDate) {
 const setText = (r) => `${r.reps || 0} × ${r.weight || 0}`;
 function renumber(date, exId) { setsFor(date, exId).forEach((r, i) => (r.set = i + 1)); }
 
+/* ---------- how-to guide links ---------- */
+// Exercises with a section in guide.html (anchor = slug of the name).
+const slug = (n) => n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const GUIDES = new Set(['belly-breathing-with-brace', 'pelvic-tilt', 'heel-slide', 'dead-bug', 'bird-dog', 'glute-bridge', 'pallof-press', 'walking',
+  'machine-chest-press', 'machine-fly', 'machine-reverse-fly', 'seated-preacher-curls', 'machine-triceps-extension', 'machine-triceps-press',
+  'machine-shoulder-press', 'machine-lateral-arm-raise', 'cable-lat-pull-down', 'cable-row', 'back-extension-machine']);
+const guideLink = (name) => (GUIDES.has(slug(name)) ? `<a class="howto" href="guide.html#${slug(name)}">ⓘ How to</a>` : '');
+
+/* ---------- one-time data updates ---------- */
+// core-safe-1: hernia-friendly core moves into Abs; retire Machine Ab Crunch (history kept, restorable).
+(function migrate() {
+  let done = [];
+  try { done = JSON.parse(localStorage.getItem('wt-migrations')) || []; } catch {}
+  if (done.includes('core-safe-1')) return;
+  const abs = db.exercises.find((e) => e.group.toLowerCase() === 'abs');
+  const order = abs ? abs.groupOrder : Math.max(0, ...db.exercises.map((e) => e.groupOrder)) + 1;
+  const group = abs ? abs.group : 'Abs';
+  ['Belly Breathing with Brace', 'Pelvic Tilt', 'Heel Slide', 'Dead Bug', 'Bird Dog', 'Glute Bridge', 'Pallof Press', 'Walking'].forEach((name, i) => {
+    const id = 'CORE' + String(i + 1).padStart(2, '0');
+    if (!db.exercises.some((e) => e.id === id || e.name.toLowerCase() === name.toLowerCase()))
+      db.exercises.push({ id, groupOrder: order, group, name, active: true });
+  });
+  const crunch = db.exercises.find((e) => e.name === 'Machine Ab Crunch');
+  if (crunch) crunch.active = false;
+  done.push('core-safe-1');
+  try { localStorage.setItem('wt-migrations', JSON.stringify(done)); } catch {}
+  localStorage.setItem(KEY, JSON.stringify(db));
+  setTimeout(() => Sync.markDirty(), 0);
+})();
+
 /* ---------- navigation ---------- */
 const TITLES = { today: 'Today', history: 'History', exercises: 'Exercises', backup: 'Settings' };
 function show(view) {
@@ -91,7 +121,7 @@ function renderToday() {
     const last = lastSession(e.id, ui.date);
     const doneN = sets.filter((s) => s.completed).length;
     return `<div class="card" data-ex="${e.id}">
-      <div class="ex-head"><span class="ex-name">${esc(e.name)}</span>
+      <div class="ex-head"><span class="ex-name">${esc(e.name)} ${guideLink(e.name)}</span>
         ${sets.length ? `<span class="ex-done">${doneN}/${sets.length} done</span>` : ''}</div>
       <div class="last">${last ? `Last (${fmtDate(last.date)}): ${last.sets.map(setText).join(', ')} ${UNIT}` : 'No history yet'}</div>
       ${sets.length ? `<div class="set-head"><span>#</span><span>Reps</span><span>Weight (${UNIT})</span><span>Done</span><span></span></div>` : ''}
@@ -164,7 +194,7 @@ function renderExercises() {
   $('#add-group').innerHTML = opts + '<option value="__new">+ New group…</option>';
   $('#add-newgroup').hidden = true;
   $('#ex-list').innerHTML = groups().map((g) => `<div class="grp-title">${esc(g.group)}</div>` +
-    db.exercises.filter((e) => e.group === g.group).map((e) => `<div class="ex-row ${e.active ? '' : 'inactive'}"><span>${esc(e.name)}</span>
+    db.exercises.filter((e) => e.group === g.group).map((e) => `<div class="ex-row ${e.active ? '' : 'inactive'}"><span>${esc(e.name)}</span> ${guideLink(e.name)}
       <button class="small ${e.active ? 'danger' : ''}" data-id="${e.id}">${e.active ? 'Delete' : 'Restore'}</button></div>`).join('')).join('');
 }
 $('#add-group').addEventListener('change', (e) => { $('#add-newgroup').hidden = e.target.value !== '__new'; });

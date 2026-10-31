@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#16181d">
+<title>Exercise Guide · Workout Tracker</title>
+<link rel="stylesheet" href="style.css?v=7">
+<script>try{var t=localStorage.getItem('wt-theme'),r=document.documentElement;if(t&&t!=='default')r.dataset.theme=t;if(t==='custom'){var v=JSON.parse(localStorage.getItem('wt-theme-vars')||'{}');for(var k in v)r.style.setProperty(k,v[k])}}catch(e){}</script>
+<style>
+  main{max-width:640px;margin:0 auto;padding-bottom:40px}
+  .back{color:var(--acc);text-decoration:none;font-size:15px}
+  .warn{border-color:var(--bad)}
+  .warn h2{color:var(--bad);margin:0;font-size:17px}
+  .warn ul,.ex ol,.ex ul{margin:4px 0;padding-left:20px}
+  .warn li,.ex li{margin:3px 0}
+  .toc{display:flex;flex-wrap:wrap;gap:6px}
+  .toc a{font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:16px;color:var(--txt);text-decoration:none;background:var(--card)}
+  .ex{scroll-margin-top:70px}
+  .ex h2{margin:0;font-size:19px}
+  .why{color:var(--dim);font-size:14px;margin:0}
+  .ex h4{margin:6px 0 0;font-size:14px;color:var(--next)}
+  .dose{background:var(--bg);border-radius:8px;padding:8px 10px;font-size:14px}
+  svg.fig{width:100%;height:auto;background:var(--bg);border-radius:10px;color:var(--txt)}
+  .fig .floor{stroke:var(--line);stroke-width:2}
+  .fig .body{stroke:currentColor;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+  .fig .head{fill:currentColor}
+  .fig .ghost{stroke:var(--dim);stroke-width:4;stroke-dasharray:6 6;stroke-linecap:round;fill:none}
+  .fig .ghosthead{fill:none;stroke:var(--dim);stroke-width:3;stroke-dasharray:4 4}
+  .fig .move{stroke:var(--acc);stroke-width:3;fill:none;marker-end:url(#arrow)}
+  .fig .band{stroke:var(--ok);stroke-width:3;fill:none}
+  .fig text{fill:var(--dim);font:12px system-ui,sans-serif}
+  .fig text.hl{fill:var(--acc);font-weight:600}
+  .stop{color:var(--bad);font-size:14px;margin:0}
+</style>
+</head>
+<body>
+<header><h1>How-to guide</h1><a class="back" href="./">← Back to app</a></header>
+<main>
+
+<!-- shared arrowhead -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="var(--acc)"/></marker></defs></svg>
+
+<div class="card warn">
+  <h2>⚠️ Read this first</h2>
+  <ul>
+    <li><b>Get your surgeon's OK</b> before starting, and ideally a physical therapist who does post-op or post-ostomy core rehab. They can tweak any of this for your hernia.</li>
+    <li><b>Breathe out on the effort.</b> Never hold your breath and strain, on these or on any machine.</li>
+    <li><b>Stop</b> if you see a bulge pop out, or a ridge or "doming" along your scar line, or you get new pain at the hernia. Stop that move and tell your doctor.</li>
+    <li><b>Go to the ER</b> if a bulge becomes hard, painful, won't push back in, or comes with nausea or vomiting.</li>
+    <li>Ask your surgeon whether to wear a <b>hernia support belt</b> while you train.</li>
+    <li>Start easy. You should feel it working, not straining. Quality over reps.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <b>What "gentle brace" means</b>
+  <p class="why">Breathe out, then lightly draw your belly button in toward your spine, about 20–30% effort, like zipping up snug jeans. Ribs stay down and you keep breathing. Your belly should flatten, never push out. Every move below uses this brace.</p>
+  <p class="why"><b>Logging:</b> leave Weight blank for bodyweight moves. Put breaths or reps in Reps. For Walking, put <b>minutes</b> in Reps. For Pallof Press, put the cable weight in Weight and reps <b>per side</b> in Reps.</p>
+  <div class="toc">
+    <a href="#belly-breathing-with-brace">Belly Breathing</a><a href="#pelvic-tilt">Pelvic Tilt</a><a href="#heel-slide">Heel Slide</a>
+    <a href="#dead-bug">Dead Bug</a><a href="#bird-dog">Bird Dog</a><a href="#glute-bridge">Glute Bridge</a>
+    <a href="#pallof-press">Pallof Press</a><a href="#walking">Walking</a><a href="#machines"><b>Machines →</b></a>
+  </div>
+</div>
+
+<h2 id="core" class="grp-title" style="font-size:20px">Core (hernia-friendly)</h2>
+<!-- 1 -->
+<section class="card ex" id="belly-breathing-with-brace">
+  <h2>Belly Breathing with Brace</h2>
+  <p class="why">The foundation. It retrains your deep core (transverse abdominis) and diaphragm with almost no pressure on the hernia.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Lying on back with knees bent, one hand on belly">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <circle class="head" cx="52" cy="108" r="12"/>
+    <path class="body" d="M66 112 L160 112 L196 78 L228 120"/>
+    <path class="body" d="M80 113 L104 100 L124 104"/>
+    <path class="ghost" d="M96 112 Q128 84 160 110"/>
+    <path class="move" d="M128 68 L128 92"/>
+    <text x="96" y="62" class="hl">exhale: belly sinks</text>
+    <text x="88" y="140">inhale: belly rises gently (dashed)</text>
+  </svg>
+  <h4>Setup</h4>
+  <p class="why">Lie on your back with knees bent and feet flat. Put one hand on your belly and one on your chest. A pillow under your head is fine.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Breathe in slowly through your nose for about 4 seconds. Your belly rises under your hand and your chest stays mostly still.</li>
+    <li>Breathe out through pursed lips for about 6 seconds and let your belly fall.</li>
+    <li>At the end of the exhale, gently draw your belly button toward your spine. Hold for 3–5 seconds while breathing normally.</li>
+    <li>Relax completely, then repeat.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 10 breaths, 1–2 sets. Log the breaths in Reps.</div>
+  <p class="stop">Stop if you feel dizzy. Slow the breathing down.</p>
+</section>
+
+<!-- 2 -->
+<section class="card ex" id="pelvic-tilt">
+  <h2>Pelvic Tilt</h2>
+  <p class="why">Teaches your lower abs to work with a tiny, controlled motion. No crunching.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Lying on back, low back flattening into the floor">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <circle class="head" cx="52" cy="108" r="12"/>
+    <path class="ghost" d="M66 112 Q110 96 160 112"/>
+    <path class="body" d="M66 112 L160 113 L196 78 L228 120"/>
+    <path class="body" d="M80 114 L130 117"/>
+    <path class="move" d="M150 88 C 168 92, 170 104, 160 108"/>
+    <path class="move" d="M112 92 L112 110"/>
+    <text x="70" y="80" class="hl">flatten low back</text>
+    <text x="164" y="140">tip pelvis back (small)</text>
+  </svg>
+  <h4>Setup</h4><p class="why">Lie on your back with knees bent, feet flat and hip-width apart, arms by your sides. Notice the small arch under your low back.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Breathe in to get ready.</li>
+    <li>Breathe out and gently brace. Tip your pelvis so your low back presses flat into the floor and your tailbone curls up slightly.</li>
+    <li>Hold 3–5 seconds while you keep breathing.</li>
+    <li>Release back to neutral.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 10 reps, 2 sets.</div>
+  <p class="stop">Your butt stays on the floor. This isn't a bridge. Keep the motion small.</p>
+</section>
+
+<!-- 3 -->
+<section class="card ex" id="heel-slide">
+  <h2>Heel Slide</h2>
+  <p class="why">Adds leg movement while your core holds steady. It's the first step toward dead bugs.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Lying on back sliding one heel out along the floor">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <circle class="head" cx="52" cy="108" r="12"/>
+    <path class="body" d="M66 112 L160 112 L196 78 L228 120"/>
+    <path class="ghost" d="M160 114 L230 117 L292 119"/>
+    <path class="body" d="M80 113 L130 116"/>
+    <path class="move" d="M232 132 L288 132"/>
+    <text x="200" y="66" class="hl">slide out, slide back</text>
+    <text x="40" y="140">low back stays still</text>
+  </svg>
+  <h4>Setup</h4><p class="why">Lie on your back with knees bent and feet flat. Find the gentle brace.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Breathe out and slowly slide one heel along the floor until the leg is nearly straight.</li>
+    <li>Breathe in and slide it back.</li>
+    <li>Switch legs. Your pelvis and low back don't rock or arch.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 8–10 per leg, 2 sets. A towel or sock under the heel helps it slide.</div>
+  <p class="stop">If your back arches or your belly pushes up, shorten the slide.</p>
+</section>
+
+<!-- 4 -->
+<section class="card ex" id="dead-bug">
+  <h2>Dead Bug</h2>
+  <p class="why">Great core control with a flat, supported back. Start with legs only and add the arms later.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Lying on back with knees up, one leg lowering">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <circle class="head" cx="52" cy="108" r="12"/>
+    <path class="body" d="M66 112 L160 112 L160 70 L200 70"/>
+    <path class="body" d="M92 112 L92 58"/>
+    <path class="ghost" d="M160 112 L222 100 L270 112"/>
+    <path class="ghost" d="M92 112 L38 72"/>
+    <path class="move" d="M206 76 C 236 80, 250 92, 252 104"/>
+    <text x="150" y="54" class="hl">tabletop: knees over hips</text>
+    <text x="20" y="140">lower one heel toward floor, back flat</text>
+  </svg>
+  <h4>Setup</h4><p class="why">Lie on your back. Lift your legs one at a time to a "tabletop" with knees over hips and shins parallel to the floor. Arms point at the ceiling, or rest on the floor at first.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Breathe out and brace. Slowly lower one heel to tap the floor, keeping the knee bent.</li>
+    <li>Breathe in and bring it back to tabletop. Switch legs.</li>
+    <li><b>Later:</b> straighten the leg further. After that, lower the opposite arm overhead at the same time.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 6–8 per side, 2 sets.</div>
+  <p class="stop">The moment your low back lifts off the floor, or your belly domes, shrink the range. Lift your legs into tabletop one at a time, never both together.</p>
+</section>
+
+<!-- 5 -->
+<section class="card ex" id="bird-dog">
+  <h2>Bird Dog</h2>
+  <p class="why">Trains your back and deep core together. Gravity isn't pushing on your belly in this position.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="On hands and knees reaching one arm forward and opposite leg back">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <circle class="head" cx="82" cy="62" r="12"/>
+    <path class="body" d="M96 70 L184 70"/>
+    <path class="body" d="M104 70 L104 120"/>
+    <path class="body" d="M184 70 L184 120 L222 120"/>
+    <path class="ghost" d="M104 70 L40 60"/>
+    <path class="ghost" d="M184 70 L282 66"/>
+    <path class="move" d="M60 44 L28 44"/>
+    <path class="move" d="M250 50 L292 50"/>
+    <text x="108" y="40" class="hl">long and level, no arch</text>
+    <text x="40" y="140">reach opposite arm and leg</text>
+  </svg>
+  <h4>Setup</h4><p class="why">Get on hands and knees with hands under shoulders and knees under hips. Keep your back flat like a tabletop.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Breathe out and brace. Slide one leg straight back along the floor, then lift it to hip height.</li>
+    <li>When that's easy, also reach the opposite arm forward.</li>
+    <li>Hold 3–5 seconds, return, and switch sides.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 6–8 per side, 2 sets.</div>
+  <p class="stop">Don't let your belly sag or your back arch. Pretend there's a glass of water on your low back.</p>
+</section>
+
+<!-- 6 -->
+<section class="card ex" id="glute-bridge">
+  <h2>Glute Bridge</h2>
+  <p class="why">Strong glutes take load off your back and belly. Keep it gentle while the brace holds.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Lying on back lifting hips into a bridge">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <path class="ghost" d="M66 112 L160 112 L196 78 L228 120"/>
+    <circle class="head" cx="52" cy="108" r="12"/>
+    <path class="body" d="M66 110 L82 112 L164 80 L200 72 L228 120"/>
+    <path class="body" d="M84 113 L134 118"/>
+    <path class="move" d="M150 108 L150 86"/>
+    <text x="114" y="52" class="hl">shoulders → knees in a line</text>
+    <text x="40" y="140">squeeze glutes, don't over-arch</text>
+  </svg>
+  <h4>Setup</h4><p class="why">Lie on your back with knees bent, feet flat and hip-width apart, close enough that your fingertips brush your heels.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Breathe out, brace, and do a small pelvic tilt.</li>
+    <li>Squeeze your glutes and lift your hips until shoulders, hips and knees make a straight line.</li>
+    <li>Hold 2–3 seconds while breathing. Lower slowly, one vertebra at a time.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 10 reps, 2 sets.</div>
+  <p class="stop">Don't push your hips past the straight line. Watch your scar line for doming as you rise, and if you see it, go lower.</p>
+</section>
+
+<!-- 7 -->
+<section class="card ex" id="pallof-press">
+  <h2>Pallof Press</h2>
+  <p class="why">Anti-rotation: your core resists a sideways pull with no crunching. You can do it on the cable machine at the gym.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Top view: standing side-on to a cable, pressing hands straight out">
+    <rect x="14" y="40" width="14" height="60" rx="3" fill="var(--line)"/>
+    <path class="band" d="M28 70 L174 70"/>
+    <path class="band" style="stroke-dasharray:6 6" d="M174 70 L236 70"/>
+    <ellipse cx="150" cy="70" rx="12" ry="34" fill="none" class="body"/>
+    <circle class="head" cx="150" cy="70" r="11"/>
+    <path class="body" d="M150 40 L174 66 M150 100 L174 74"/>
+    <path class="ghost" d="M150 40 L236 66 M150 100 L236 74"/>
+    <path class="move" d="M184 120 L232 120"/>
+    <path class="move" d="M120 30 C 104 40, 104 100, 120 110" style="stroke:var(--bad);marker-end:none"/>
+    <text x="40" y="30">TOP VIEW · cable at your side</text>
+    <text x="184" y="140" class="hl">press out, hold</text>
+    <text x="60" y="140" style="fill:var(--bad)">don't let it twist you</text>
+  </svg>
+  <h4>Setup</h4><p class="why">Set a cable handle (or a resistance band) at chest height. Stand side-on to the machine with feet hip-width apart and knees soft. Hold the handle with both hands at the center of your chest. Step out until there's tension.</p>
+  <h4>Steps</h4>
+  <ol>
+    <li>Brace gently. Breathe out and press the handle straight out in front of your chest.</li>
+    <li>Hold 2–3 seconds. The cable tries to twist you toward the machine. Don't let it, and keep your hips and shoulders square.</li>
+    <li>Breathe in and bring it back to your chest. Do all your reps, then turn around and do the other side.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 8–10 per side, 2 sets. Start <b>light</b>, the lightest plate. Log the weight and reps per side.</div>
+  <p class="stop">If you have to hold your breath to resist, it's too heavy.</p>
+</section>
+
+<!-- 8 -->
+<section class="card ex" id="walking">
+  <h2>Walking</h2>
+  <p class="why">Builds endurance, helps healing, and works your core in an upright, natural way.</p>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Person walking upright">
+    <line class="floor" x1="10" y1="122" x2="310" y2="122"/>
+    <circle class="head" cx="160" cy="26" r="12"/>
+    <path class="body" d="M160 40 L160 78"/>
+    <path class="body" d="M160 78 L140 100 L132 120 M160 78 L176 100 L188 120"/>
+    <path class="body" d="M160 48 L146 66 L150 82 M160 48 L176 62 L184 78"/>
+    <path class="move" d="M210 60 L270 60"/>
+    <text x="196" y="50" class="hl">tall, ribs down</text>
+    <text x="40" y="140">brisk but able to talk</text>
+  </svg>
+  <h4>How</h4>
+  <ol>
+    <li>Walk tall: head up, ribs stacked over hips, arms swinging easily.</li>
+    <li>Keep a pace where you can still talk in full sentences.</li>
+    <li>Build time before speed or hills. Add 5 minutes a week.</li>
+  </ol>
+  <div class="dose"><b>Dose:</b> 10–30 minutes. Log the minutes in Reps.</div>
+</section>
+
+
+<h2 id="machines" class="grp-title" style="font-size:20px;margin-top:28px">Machines</h2>
+<div class="card"><div class="toc"><a href="#machine-chest-press">Chest Press</a><a href="#machine-fly">Fly</a><a href="#machine-reverse-fly">Reverse Fly</a><a href="#seated-preacher-curls">Seated Preacher Curls</a><a href="#machine-triceps-extension">Triceps Extension</a><a href="#machine-triceps-press">Triceps Press</a><a href="#machine-shoulder-press">Shoulder Press</a><a href="#machine-lateral-arm-raise">Lateral Arm Raise</a><a href="#cable-lat-pull-down">Lat Pull Down</a><a href="#cable-row">Row</a><a href="#back-extension-machine">Back Extension Machine</a></div></div>
+<h2 class="grp-title" id="group-chest" style="font-size:18px">Chest</h2>
+<section class="card ex" id="machine-chest-press">
+  <h2>Machine Chest Press</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Seated pressing handles forward"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="62" y="28" width="12" height="74" rx="3" fill="var(--line)"/><rect x="70" y="100" width="92" height="10" rx="3" fill="var(--line)"/><circle class="head" cx="92" cy="34" r="12"/><path class="body" d="M92 48 L92 100 L148 100 L150 128"/><path class="body" d="M92 58 L104 78 L132 66"/><path class="ghost" d="M92 58 L176 62"/><rect x="128" y="58" width="6" height="16" fill="var(--acc)"/><path class="move" d="M140 44 L180 44"/><text x="190" y="48" class="hl">push out, exhale</text><text x="170" y="90">handles at mid-chest</text></svg>
+  <h4>Setup</h4><p class="why">Set the seat so the handles line up with the middle of your chest. Sit with your back flat on the pad and feet flat.</p>
+  <h4>Steps</h4><ol><li>Grip the handles and breathe out as you press them straight out.</li><li>Stop just short of locking your elbows.</li><li>Breathe in and bring them back slowly until you feel a light stretch across your chest.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 8–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Shoulders stay down and back against the pad. Don't let them roll forward.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="machine-fly">
+  <h2>Machine Fly</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Top view: arms sweep from wide to together in front"><text x="12" y="20">TOP VIEW</text><ellipse cx="160" cy="110" rx="40" ry="12" class="body"/><circle class="head" cx="160" cy="110" r="11"/><path class="body" d="M122 108 L72 86 M198 108 L248 86"/><path class="ghost" d="M122 108 L150 40 M198 108 L170 40"/><path class="move" d="M70 72 C 90 46, 120 34, 140 32"/><path class="move" d="M250 72 C 230 46, 200 34, 180 32"/><text x="128" y="20" class="hl">hug a tree</text><text x="20" y="140">elbows soft, chest up</text></svg>
+  <h4>Setup</h4><p class="why">Set the seat so the handles are at chest height and your arms are about level with your shoulders. Back flat on the pad.</p>
+  <h4>Steps</h4><ol><li>Grab the handles with a slight bend in your elbows, and lock that bend in.</li><li>Breathe out and sweep your arms together in front of you, like hugging a big tree.</li><li>Squeeze for a second, then breathe in and open slowly until you feel a stretch. Don't go past where your shoulders are comfortable.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 10–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Light weight and slow, especially on the way back open. The stretch is where shoulders get hurt.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="machine-reverse-fly">
+  <h2>Machine Reverse Fly</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Top view: chest on pad, arms sweep from front out to sides"><text x="12" y="20">TOP VIEW · chest on pad</text><rect x="120" y="34" width="80" height="10" rx="3" fill="var(--line)"/><ellipse cx="160" cy="60" rx="40" ry="12" class="body"/><circle class="head" cx="160" cy="60" r="11"/><path class="ghost" d="M122 58 L150 18 M198 58 L170 18"/><path class="body" d="M122 62 L64 76 M198 62 L256 76"/><path class="move" d="M140 14 C 110 20, 84 40, 70 62"/><path class="move" d="M180 14 C 210 20, 236 40, 250 62"/><text x="80" y="120" class="hl">squeeze shoulder blades together</text><text x="100" y="140">arms open wide, elbows soft</text></svg>
+  <h4>Setup</h4><p class="why">Sit facing the machine with your chest against the pad. Set the handles so your arms are at shoulder height, out in front of you.</p>
+  <h4>Steps</h4><ol><li>Grip the handles with a soft bend in your elbows.</li><li>Breathe out and open your arms out to the sides, squeezing your shoulder blades together.</li><li>Pause, then breathe in and return slowly.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 12–15. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Go light. This works small rear-shoulder muscles. Don't shrug your shoulders up to your ears.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<h2 class="grp-title" id="group-arms" style="font-size:18px">Arms</h2>
+<section class="card ex" id="seated-preacher-curls">
+  <h2>Seated Preacher Curls</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Upper arm on angled pad, forearm curls up"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="60" y="96" width="70" height="10" rx="3" fill="var(--line)"/><path d="M118 58 L176 100" stroke="var(--line)" stroke-width="12" stroke-linecap="round"/><circle class="head" cx="96" cy="34" r="12"/><path class="body" d="M100 48 L92 96 L140 98 L142 128"/><path class="body" d="M106 56 L160 86 L148 46"/><path class="ghost" d="M160 86 L204 116"/><path class="move" d="M208 100 C 210 70, 190 50, 166 40"/><text x="188" y="34" class="hl">curl up, exhale</text><text x="150" y="146">lower all the way, slowly</text></svg>
+  <h4>Setup</h4><p class="why">Adjust the seat so your armpits sit snug on top of the pad and the backs of your upper arms rest flat on it.</p>
+  <h4>Steps</h4><ol><li>Grip the handle (or bar) with palms up.</li><li>Breathe out and curl it up toward your shoulders. Your upper arms stay glued to the pad.</li><li>Breathe in and lower slowly until your arms are almost straight.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 8–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Don't swing your body or lift your elbows off the pad. Control the lowering. That's where most of the work happens.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="machine-triceps-extension">
+  <h2>Machine Triceps Extension</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Seated, elbows on pad, forearms straighten forward"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="62" y="28" width="12" height="74" rx="3" fill="var(--line)"/><rect x="70" y="100" width="92" height="10" rx="3" fill="var(--line)"/><circle class="head" cx="92" cy="34" r="12"/><path class="body" d="M92 48 L92 100 L148 100 L150 128"/><rect x="112" y="64" width="34" height="9" rx="3" fill="var(--line)"/><path class="body" d="M92 58 L134 64 L122 32"/><path class="ghost" d="M134 64 L180 80"/><path class="move" d="M132 24 C 168 30, 184 50, 186 70"/><text x="196" y="40" class="hl">straighten, exhale</text><text x="170" y="100">elbows stay on the pad</text></svg>
+  <h4>Setup</h4><p class="why">Set the seat so your elbows line up with the machine's pivot point, the axle the arm swings around, with your upper arms resting on the pad.</p>
+  <h4>Steps</h4><ol><li>Grip the handles with your elbows bent.</li><li>Breathe out and straighten your arms by pushing the handles forward and down.</li><li>Squeeze the backs of your arms, then breathe in and let the handles come back slowly.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 10–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Only your forearms move. Don't let your elbows flare out or your shoulders hunch forward.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="machine-triceps-press">
+  <h2>Machine Triceps Press</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Seated, pushing handles down beside the hips"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="62" y="28" width="12" height="74" rx="3" fill="var(--line)"/><rect x="70" y="100" width="92" height="10" rx="3" fill="var(--line)"/><circle class="head" cx="92" cy="34" r="12"/><path class="body" d="M92 48 L92 100 L148 100 L150 128"/><path class="body" d="M92 58 L72 82 L104 92"/><path class="ghost" d="M92 58 L100 104"/><rect x="100" y="86" width="14" height="6" fill="var(--acc)"/><path class="move" d="M126 70 L126 106"/><text x="140" y="70" class="hl">press down, exhale</text><text x="140" y="90">chest up, elbows back</text></svg>
+  <h4>Setup</h4><p class="why">Sit tall with your back on the pad and the handles at your sides, about level with your lower ribs. Use the thigh pad if there is one.</p>
+  <h4>Steps</h4><ol><li>Grip the handles and keep your elbows pointing back, not out.</li><li>Breathe out and press the handles down until your arms are straight beside your hips.</li><li>Breathe in and let them rise slowly to about a 90° elbow bend. No lower.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 8–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Keep your shoulders down and your chest up. Don't let them roll forward at the top.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<h2 class="grp-title" id="group-shoulders-lats" style="font-size:18px">Shoulders/Lats</h2>
+<section class="card ex" id="machine-shoulder-press">
+  <h2>Machine Shoulder Press</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Seated, pressing handles overhead"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="62" y="28" width="12" height="74" rx="3" fill="var(--line)"/><rect x="70" y="100" width="92" height="10" rx="3" fill="var(--line)"/><circle class="head" cx="92" cy="34" r="12"/><path class="body" d="M92 48 L92 100 L148 100 L150 128"/><path class="body" d="M92 58 L106 74 L106 42"/><path class="ghost" d="M92 56 L100 10"/><path class="move" d="M126 60 L126 16"/><text x="140" y="24" class="hl">press up, exhale</text><text x="140" y="60">back flat on the pad</text></svg>
+  <h4>Setup</h4><p class="why">Set the seat so the handles start about level with your shoulders. Back flat against the pad and feet planted.</p>
+  <h4>Steps</h4><ol><li>Grip the handles and breathe out as you press them overhead.</li><li>Stop just short of locking your elbows.</li><li>Breathe in and lower slowly back to shoulder height.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 8–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Don't arch your low back off the pad to push more weight. If you have to, it's too heavy. Overhead pressing loads the core, so exhale every rep.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="machine-lateral-arm-raise">
+  <h2>Machine Lateral Arm Raise</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Front view: seated, arms raise out to the sides"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="120" y="96" width="80" height="10" rx="3" fill="var(--line)"/><circle class="head" cx="160" cy="30" r="12"/><path class="body" d="M160 44 L160 96 M160 96 L140 128 M160 96 L180 128 M146 50 L174 50"/><path class="body" d="M146 50 L138 92 M174 50 L182 92"/><path class="ghost" d="M146 50 L92 54 M174 50 L228 54"/><path class="move" d="M124 92 C 100 86, 90 74, 88 62"/><path class="move" d="M196 92 C 220 86, 230 74, 232 62"/><text x="12" y="20">FRONT VIEW</text><text x="100" y="18" class="hl">up to shoulder height</text><text x="20" y="146">lead with elbows</text></svg>
+  <h4>Setup</h4><p class="why">Sit with the pads resting on the outside of your upper arms, near your elbows. Line your shoulders up with the machine's pivot points.</p>
+  <h4>Steps</h4><ol><li>Grip the handles lightly. Your elbows do the lifting.</li><li>Breathe out and raise your arms out to the sides up to shoulder height. Not higher.</li><li>Breathe in and lower slowly.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 12–15. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Go light and don't shrug. If your shoulders creep up toward your ears, drop the weight.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<h2 class="grp-title" id="group-back" style="font-size:18px">Back</h2>
+<section class="card ex" id="cable-lat-pull-down">
+  <h2>Cable Lat Pull Down</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Front view: seated, pulling bar down to upper chest"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="120" y="96" width="80" height="10" rx="3" fill="var(--line)"/><rect x="118" y="80" width="84" height="8" rx="3" fill="var(--line)"/><line x1="160" y1="0" x2="160" y2="12" stroke="var(--ok)" stroke-width="3"/><line x1="96" y1="12" x2="224" y2="12" class="body"/><circle class="head" cx="160" cy="50" r="12"/><path class="body" d="M160 64 L160 96 M146 68 L174 68 M146 68 L116 40 L104 14 M174 68 L204 40 L216 14"/><path class="ghost" d="M146 68 L118 86 L114 62 M174 68 L202 86 L206 62 M100 62 L220 62"/><path class="move" d="M246 20 L246 60"/><text x="12" y="20">FRONT VIEW</text><text x="230" y="76" class="hl">to upper chest</text><text x="20" y="146">elbows down and back, chest up</text></svg>
+  <h4>Setup</h4><p class="why">Set the thigh pad so it holds your legs down snugly. Grab the bar a bit wider than your shoulders and sit down with your arms straight up.</p>
+  <h4>Steps</h4><ol><li>Lean back very slightly and lift your chest.</li><li>Breathe out and pull the bar down to your upper chest, driving your elbows down and back.</li><li>Breathe in and let the bar rise slowly until your arms are straight again.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 8–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Never pull behind your neck. Don't yank with your body. If you have to rock back to move it, drop the weight.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="cable-row">
+  <h2>Cable Row</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Seated, pulling cable handle to the belly"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="50" y="104" width="100" height="10" rx="3" fill="var(--line)"/><rect x="222" y="70" width="10" height="58" rx="2" fill="var(--line)"/><circle class="head" cx="92" cy="40" r="12"/><path class="body" d="M92 54 L92 104 L150 92 L204 118"/><path class="body" d="M94 62 L74 80 L118 84"/><line x1="118" y1="84" x2="226" y2="96" class="band"/><path class="ghost" d="M94 62 L170 82"/><path class="move" d="M170 70 L124 70"/><text x="128" y="56" class="hl">pull to belly, exhale</text><text x="20" y="146">sit tall, squeeze shoulder blades</text></svg>
+  <h4>Setup</h4><p class="why">Sit on the bench with your feet on the platform and knees slightly bent. Grab the handle and sit up tall with your arms straight.</p>
+  <h4>Steps</h4><ol><li>Brace gently and keep your torso upright.</li><li>Breathe out and pull the handle to your belly, elbows close to your sides, squeezing your shoulder blades together.</li><li>Breathe in and let your arms go straight slowly. Don't let the weight pull you forward.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 8–12. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Don't rock back and forth to move the weight. Your torso stays still and your arms and back do the work.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<section class="card ex" id="back-extension-machine">
+  <h2>Back Extension Machine</h2>
+  <svg class="fig" viewBox="0 0 320 150" role="img" aria-label="Seated, pushing back pad from leaning forward to upright"><line class="floor" x1="10" y1="130" x2="310" y2="130"/><rect x="70" y="100" width="92" height="10" rx="3" fill="var(--line)"/><path class="ghost" d="M92 100 L136 60"/><circle class="ghosthead" cx="146" cy="50" r="12"/><circle class="head" cx="88" cy="34" r="12"/><path class="body" d="M90 48 L92 100 L148 100 L150 128 M90 58 L112 66"/><rect x="70" y="50" width="10" height="26" rx="3" fill="var(--acc)"/><path class="move" d="M150 36 C 136 20, 118 16, 104 20"/><text x="160" y="40" class="hl">roll back to upright</text><text x="150" y="80">small range, smooth</text></svg>
+  <h4>Setup</h4><p class="why">Set the seat and foot plate so the back pad sits across your shoulder blades and your hips are snug against the seat back.</p>
+  <h4>Steps</h4><ol><li>Start leaning slightly forward with your arms crossed on your chest.</li><li>Breathe out and push back against the pad until you're upright. Don't go into a big backbend.</li><li>Breathe in and return slowly.</li></ol>
+  <div class="dose"><b>Dose:</b> 2–3 sets of 10–15. Pick a weight where the last 2 reps are hard but your form stays clean.</div>
+  <p class="why"><b>Form:</b> Light and controlled. Stop at upright, because leaning way back strains your low back.</p>
+  <p class="stop">Breathe out on every push or pull and never hold your breath. Stop if you see a bulge or doming at your scar.</p>
+</section>
+<p class="hint" style="text-align:center">General guidance, not medical advice. Your surgeon or PT gets the final say.</p>
+<p style="text-align:center"><a class="back" href="./">← Back to app</a></p>
+</main>
+</body>
+</html>
