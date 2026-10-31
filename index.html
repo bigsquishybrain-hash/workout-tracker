@@ -9,6 +9,7 @@
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem('wt-theme');if(t&&t!=='default')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <header>
@@ -52,6 +53,10 @@
   <!-- BACKUP -->
   <section id="view-backup" class="view" hidden>
     <div class="card">
+      <h3>Color theme</h3>
+      <div id="themes" class="themes"></div>
+    </div>
+    <div class="card">
       <h3>Backup to Excel</h3>
       <p class="hint">Downloads WorkoutTracker.xlsx in the same layout as the file in your Drive "Workouts" folder. Until auto-sync is set up, save it there now and then.</p>
       <button id="btn-export" class="primary">Export WorkoutTracker.xlsx</button>
@@ -78,7 +83,7 @@
   <button data-view="today" class="active">🏋️<span>Today</span></button>
   <button data-view="history">📈<span>History</span></button>
   <button data-view="exercises">📋<span>Exercises</span></button>
-  <button data-view="backup">💾<span>Backup</span></button>
+  <button data-view="backup">⚙️<span>Settings</span></button>
 </nav>
 
 <script src="xlsx.full.min.js"></script>

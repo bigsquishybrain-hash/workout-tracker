@@ -50,7 +50,7 @@ const setText = (r) => `${r.reps || 0} × ${r.weight || 0}`;
 function renumber(date, exId) { setsFor(date, exId).forEach((r, i) => (r.set = i + 1)); }
 
 /* ---------- navigation ---------- */
-const TITLES = { today: 'Today', history: 'History', exercises: 'Exercises', backup: 'Backup' };
+const TITLES = { today: 'Today', history: 'History', exercises: 'Exercises', backup: 'Settings' };
 function show(view) {
   document.querySelectorAll('.view').forEach((v) => (v.hidden = v.id !== 'view-' + view));
   document.querySelectorAll('nav button').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
@@ -249,6 +249,27 @@ function renderBackup() {
   const sessions = new Set(db.log.map((r) => r.date)).size;
   $('#stats').textContent = `On this phone: ${db.exercises.filter((e) => e.active).length} exercises, ${sessions} workout days, ${db.log.length} sets logged.`;
 }
+
+/* ---------- THEMES ---------- */
+// To add a theme: add an entry here and a matching [data-theme=...] block in style.css.
+const THEMES = [
+  { id: 'default', name: 'Gym Rat', bar: '#16181d', sw: ['#16181d', '#22252c', '#f5a623', '#3ecf74'] },
+  { id: 'gundam', name: 'Gundam', bar: '#ffffff', sw: ['#ffffff', '#1d4fa3', '#d32f2f', '#ffd23f'] },
+];
+function applyTheme(id) {
+  const t = THEMES.find((x) => x.id === id) || THEMES[0];
+  if (t.id === 'default') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t.id;
+  document.querySelector('meta[name=theme-color]').content = t.bar;
+  try { localStorage.setItem('wt-theme', t.id); } catch {}
+  renderThemes();
+}
+function renderThemes() {
+  const cur = document.documentElement.dataset.theme || 'default';
+  $('#themes').innerHTML = THEMES.map((t) => `<button class="${t.id === cur ? 'on' : ''}" data-theme-id="${t.id}">
+    <span class="swatch">${t.sw.map((c) => `<i style="background:${c}"></i>`).join('')}</span>${esc(t.name)}</button>`).join('');
+}
+$('#themes').addEventListener('click', (e) => { const b = e.target.closest('[data-theme-id]'); if (b) applyTheme(b.dataset.themeId); });
+applyTheme(localStorage.getItem('wt-theme') || 'default');
 
 /* ---------- boot ---------- */
 function replaceDb(data) {

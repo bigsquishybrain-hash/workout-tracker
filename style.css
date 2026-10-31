@@ -1,7 +1,9 @@
-:root{--bg:#16181d;--card:#22252c;--line:#33373f;--txt:#eceef1;--dim:#9aa1ab;--acc:#f5a623;--ok:#3ecf74;--bad:#e5534b}
+:root{--bg:#16181d;--card:#22252c;--line:#33373f;--txt:#eceef1;--dim:#9aa1ab;--acc:#f5a623;--on-acc:#111;--ok:#3ecf74;--bad:#e5534b;--head:#16181d;--head-line:#33373f;--nav:#1c1f25;--nav-txt:#9aa1ab;--nav-on:#f5a623;--next:#f5a623}
+/* Gundam: RX-78-2 white armor, blue chest, red trim, yellow V-fin */
+[data-theme=gundam]{--bg:#e9edf3;--card:#ffffff;--line:#c5cedb;--txt:#16213e;--dim:#5d6a85;--acc:#1d4fa3;--on-acc:#fff;--ok:#d39600;--bad:#d32f2f;--head:#ffffff;--head-line:#d32f2f;--nav:#1d4fa3;--nav-txt:#c9d6f0;--nav-on:#ffd23f;--next:#d32f2f;color-scheme:light}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.4 system-ui,-apple-system,Roboto,sans-serif}
-header{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:5;background:var(--head);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:3px solid var(--head-line)}
 h1{font-size:20px;margin:0}
 h3{margin:0 0 8px;font-size:16px}
 .saved{font-size:12px;color:var(--ok);transition:opacity .4s}
@@ -10,13 +12,13 @@ main{padding:12px 12px 90px}
 input,select,button{font:inherit;color:var(--txt)}
 input,select{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;width:100%}
 button{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;cursor:pointer}
-button.primary{background:var(--acc);border-color:var(--acc);color:#111;font-weight:600}
+button.primary{background:var(--acc);border-color:var(--acc);color:var(--on-acc);font-weight:600}
 button.small{padding:6px 10px;font-size:14px}
 button.danger{color:var(--bad)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0}
 .chips button{border-radius:20px;padding:8px 14px}
-.chips button.on{background:var(--acc);color:#111;border-color:var(--acc);font-weight:600}
-.chips button.next{border-color:var(--acc)}
+.chips button.on{background:var(--acc);color:var(--on-acc);border-color:var(--acc);font-weight:600}
+.chips button.next{border-color:var(--next);border-width:2px}
 .hint{color:var(--dim);font-size:13px;margin:6px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;display:flex;flex-direction:column;gap:8px}
 .ex-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
@@ -40,14 +42,19 @@ button.danger{color:var(--bad)}
 .sess .date{font-weight:600}
 .sess ul{margin:4px 0 0;padding-left:18px}
 .sess li.skip{color:var(--dim);text-decoration:line-through}
-.grp-title{color:var(--acc);font-weight:600;margin:16px 4px 4px}
+.grp-title{color:var(--next);font-weight:600;margin:16px 4px 4px}
 .ex-row{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px solid var(--line)}
 .ex-row.inactive span{color:var(--dim);text-decoration:line-through}
-nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#1c1f25;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;border:none;border-radius:0;background:none;display:flex;flex-direction:column;align-items:center;font-size:20px;padding:8px 0;color:var(--dim)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--nav);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:none;border-radius:0;background:none;display:flex;flex-direction:column;align-items:center;font-size:20px;padding:8px 0;color:var(--nav-txt)}
 nav button span{font-size:11px}
-nav button.active{color:var(--acc)}
+nav button.active{color:var(--nav-on);font-weight:600}
 .empty{color:var(--dim);text-align:center;padding:30px 10px}
 .sync{font-size:12px;padding:6px 10px;border-radius:16px;margin-left:auto}
 .sync.ok{color:var(--ok)}.sync.dirty,.sync.err{color:var(--acc);border-color:var(--acc)}.sync.busy{color:var(--dim)}
 header .saved{margin-left:8px}
+.themes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.themes button{display:flex;align-items:center;gap:8px;justify-content:flex-start}
+.themes button.on{outline:2px solid var(--acc)}
+.swatch{display:inline-flex;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
+.swatch i{width:12px;height:18px}
