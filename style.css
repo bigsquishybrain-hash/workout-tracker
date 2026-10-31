@@ -48,3 +48,6 @@ nav button{flex:1;border:none;border-radius:0;background:none;display:flex;flex-
 nav button span{font-size:11px}
 nav button.active{color:var(--acc)}
 .empty{color:var(--dim);text-align:center;padding:30px 10px}
+.sync{font-size:12px;padding:6px 10px;border-radius:16px;margin-left:auto}
+.sync.ok{color:var(--ok)}.sync.dirty,.sync.err{color:var(--acc);border-color:var(--acc)}.sync.busy{color:var(--dim)}
+header .saved{margin-left:8px}

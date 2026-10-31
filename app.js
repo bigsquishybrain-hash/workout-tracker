@@ -28,6 +28,7 @@ try { db = JSON.parse(localStorage.getItem(KEY)) || seedDb(); } catch { db = see
 let savedTimer;
 function save() {
   localStorage.setItem(KEY, JSON.stringify(db));
+  Sync.markDirty();
   const el = $('#saved'); el.textContent = 'Saved ✓'; el.style.opacity = 1;
   clearTimeout(savedTimer); savedTimer = setTimeout(() => (el.style.opacity = 0), 1200);
 }
@@ -250,6 +251,31 @@ function renderBackup() {
 }
 
 /* ---------- boot ---------- */
-window.WT = { get db() { return db; }, buildWorkbook, parseWorkbook }; // for debugging/tests
+function replaceDb(data) {
+  db = data; localStorage.setItem(KEY, JSON.stringify(db));
+  const v = document.querySelector('nav button.active')?.dataset.view || 'today'; show(v);
+}
+window.WT = { get db() { return db; }, buildWorkbook, parseWorkbook, replaceDb };
+
+/* ---------- Drive sync UI ---------- */
+Sync.onStatus((s) => {
+  const b = $('#sync-btn');
+  b.hidden = s.state === 'off' && !Sync.configured();
+  b.className = 'sync ' + s.state;
+  b.textContent = (s.state === 'ok' ? '☁️ ' : s.state === 'busy' ? '⏳ ' : s.state === 'off' ? '☁️ ' : '⚠️ ') + s.text;
+  $('#drive-status').textContent = s.text;
+  const connected = s.state !== 'off';
+  $('#btn-connect').hidden = connected || !Sync.configured();
+  $('#btn-syncnow').hidden = $('#btn-pull').hidden = $('#btn-disconnect').hidden = !connected;
+  $('#drive-notset').hidden = Sync.configured();
+});
+$('#sync-btn').addEventListener('click', () => (Sync.status().state === 'off' ? show('backup') : Sync.syncNow()));
+$('#btn-connect').addEventListener('click', () => Sync.connect());
+$('#btn-syncnow').addEventListener('click', () => Sync.syncNow());
+$('#btn-pull').addEventListener('click', () => {
+  if (confirm('Replace everything on this phone with the copy in Google Drive?')) Sync.pull();
+});
+$('#btn-disconnect').addEventListener('click', () => { if (confirm('Disconnect Google Drive? Your data stays on the phone and in Drive.')) Sync.disconnect(); });
 show('today');
+Sync.tryAuto();
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js');
