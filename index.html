@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16181d">
+<title>Workout Tracker</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1 id="title">Today</h1>
+  <span id="saved" class="saved"></span>
+</header>
+
+<main>
+  <!-- TODAY -->
+  <section id="view-today" class="view">
+    <div class="row">
+      <label class="lbl">Date <input type="date" id="today-date"></label>
+    </div>
+    <div id="group-picker" class="chips"></div>
+    <p id="group-hint" class="hint"></p>
+    <div id="today-list"></div>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="view-history" class="view" hidden>
+    <label class="lbl">Exercise
+      <select id="hist-exercise"></select>
+    </label>
+    <div id="hist-summary" class="summary"></div>
+    <div id="hist-list"></div>
+  </section>
+
+  <!-- EXERCISES -->
+  <section id="view-exercises" class="view" hidden>
+    <form id="add-ex" class="card">
+      <h3>Add exercise</h3>
+      <input id="add-name" placeholder="Exercise name" required>
+      <select id="add-group"></select>
+      <input id="add-newgroup" placeholder="New group name" hidden>
+      <button type="submit" class="primary">Add</button>
+    </form>
+    <div id="ex-list"></div>
+  </section>
+
+  <!-- BACKUP -->
+  <section id="view-backup" class="view" hidden>
+    <div class="card">
+      <h3>Backup to Excel</h3>
+      <p class="hint">Downloads WorkoutTracker.xlsx in the same layout as the file in your Drive "Workouts" folder. Until auto-sync is set up, save it there now and then.</p>
+      <button id="btn-export" class="primary">Export WorkoutTracker.xlsx</button>
+    </div>
+    <div class="card">
+      <h3>Restore from Excel</h3>
+      <p class="hint">Loads a WorkoutTracker.xlsx and <b>replaces</b> what's on this phone.</p>
+      <input type="file" id="file-import" accept=".xlsx">
+    </div>
+    <div class="card">
+      <h3>Google Drive auto-sync</h3>
+      <p class="hint">Coming in the next step.</p>
+    </div>
+    <p id="stats" class="hint"></p>
+  </section>
+</main>
+
+<nav>
+  <button data-view="today" class="active">🏋️<span>Today</span></button>
+  <button data-view="history">📈<span>History</span></button>
+  <button data-view="exercises">📋<span>Exercises</span></button>
+  <button data-view="backup">💾<span>Backup</span></button>
+</nav>
+
+<script src="xlsx.full.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
